@@ -1,5 +1,5 @@
 // ====== Configuración ======
-const MODELO = "gemini-2.5-flash"; // modelo gratuito de Gemini; cámbialo si Google publica uno nuevo
+const MODELO = "gemini-3.8-flash"; // modelo gratuito de Gemini; cámbialo si Google publica uno nuevo
 const URL_API = `https://generativelanguage.googleapis.com/v1beta/models/${MODELO}:generateContent`;
 const CLAVE_STORAGE_API = "claveApiGemini";
 const CLAVE_STORAGE_EQUIPO = "equipoRugby";
