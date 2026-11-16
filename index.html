@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mensajes para tu equipo de rugby</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="contenedor">
+    <header>
+      <h1>Mensajes para tu equipo de rugby</h1>
+      <p class="subtitulo">Charlas, convocatorias y post-partidos con los resultados, las bajas y el ánimo del vestuario.</p>
+    </header>
+
+    <form id="formulario" novalidate>
+      <fieldset>
+        <legend>Conexión</legend>
+        <label for="claveApi">Tu API Key de Groq</label>
+        <input type="password" id="claveApi" placeholder="Se guarda solo en tu navegador" autocomplete="off">
+        <small>Gratis en <a href="https://console.groq.com/keys" target="_blank" rel="noopener">Groq Console</a>.</small>
+      </fieldset>
+
+      <fieldset>
+        <legend>El mensaje</legend>
+        <label for="tipoMensaje">¿Qué tipo de mensaje necesitas?</label>
+        <select id="tipoMensaje">
+          <option value="una charla previa al partido">Charla previa al partido</option>
+          <option value="un mensaje tras una victoria">Después de una victoria</option>
+          <option value="un mensaje tras una derrota">Después de una derrota</option>
+          <option value="un mensaje tras un empate o un partido muy igualado">Después de un empate</option>
+          <option value="una convocatoria con la información del partido o del entrenamiento">Convocatoria</option>
+          <option value="un mensaje de motivación para la semana de entrenamientos">Motivación para la semana</option>
+          <option value="un mensaje de ánimo para un jugador lesionado">Ánimo a un lesionado</option>
+          <option value="un mensaje de bienvenida a un jugador nuevo">Bienvenida a un nuevo</option>
+        </select>
+
+        <label for="remitente">¿Quién lo envía?</label>
+        <select id="remitente">
+          <option value="el entrenador">Entrenador</option>
+          <option value="el capitán">Capitán</option>
+          <option value="el delegado o la directiva del club">Delegado / directiva</option>
+        </select>
+
+        <div class="fila">
+          <div>
+            <label for="equipo">Tu equipo</label>
+            <input type="text" id="equipo" placeholder="Ej: Los Toros RC">
+          </div>
+          <div>
+            <label for="rival">Rival (opcional)</label>
+            <input type="text" id="rival" placeholder="Ej: Pampas XV">
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Contexto del equipo</legend>
+        <label for="resultados">Resultados anteriores</label>
+        <textarea id="resultados" rows="2" placeholder="Ej: Perdimos 17-20 con Pampas, ganamos 31-10 a Lobos, 2 victorias seguidas"></textarea>
+
+        <label for="lesionados">Jugadores lesionados o de baja</label>
+        <textarea id="lesionados" rows="2" placeholder="Ej: Martín (hombro), el 8 Sosa vuelve la próxima semana"></textarea>
+
+        <div class="fila">
+          <div>
+            <label for="animo">Estado de ánimo del equipo</label>
+            <select id="animo">
+              <option value="confiado">Confiado</option>
+              <option value="golpeado y con ganas de revancha">Golpeado, con ganas de revancha</option>
+              <option value="tenso y con nervios">Tenso</option>
+              <option value="eufórico">Eufórico</option>
+              <option value="cansado y con poca energía">Cansado</option>
+              <option value="dividido o con poca cohesión">Poco unido</option>
+            </select>
+          </div>
+          <div>
+            <label for="tono">Tono</label>
+            <select id="tono">
+              <option value="inspirador y de arenga">Arenga</option>
+              <option value="firme y exigente">Exigente</option>
+              <option value="cercano y de camaradería">Camaradería</option>
+              <option value="sereno y reflexivo">Sereno</option>
+              <option value="con humor de vestuario">Humor</option>
+            </select>
+          </div>
+        </div>
+
+        <label for="pautas">Pautas extra (opcional)</label>
+        <textarea id="pautas" rows="2" placeholder="Ej: Insistir en la defensa y en el line-out, mencionar el tercer tiempo"></textarea>
+      </fieldset>
+
+      <fieldset>
+        <legend>Formato</legend>
+        <label for="formato">¿Dónde lo vas a usar?</label>
+        <select id="formato">
+          <option value="un mensaje corto para el grupo de WhatsApp, de 3 a 5 líneas">WhatsApp, corto</option>
+          <option value="un mensaje de WhatsApp de longitud media, de 2 a 3 párrafos">WhatsApp, medio</option>
+          <option value="un discurso para decir en voz alta en el vestuario, de aproximadamente un minuto">Discurso en el vestuario</option>
+        </select>
+      </fieldset>
+
+      <button type="submit" id="botonGenerar">Generar mensaje</button>
+    </form>
+
+    <p id="mensajeError" class="error" role="alert" hidden></p>
+    <div id="cargando" class="cargando" hidden aria-live="polite">
+      <span class="spinner" aria-hidden="true"></span> Preparando el mensaje…
+    </div>
+
+    <section id="resultado" class="resultado" hidden>
+      <h2>Tu mensaje</h2>
+      <div id="textoResultado" class="texto-resultado"></div>
+      <div class="acciones">
+        <button type="button" id="botonCopiar" class="secundario">Copiar texto</button>
+        <button type="button" id="botonRegenerar" class="secundario">Otra versión</button>
+      </div>
+    </section>
+
+    <section id="seccionHistorial" class="historial" hidden>
+      <h2>Últimos mensajes</h2>
+      <ul id="listaHistorial"></ul>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
